@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Layout from "../layout/layout";
 import Link from "next/link";
 import styles from "../styles/Form.module.css";
 import { HiAtSymbol, HiUser } from "react-icons/hi";
@@ -80,7 +79,7 @@ export default function Register() {
       });
   }
   return (
-    <Layout>
+    <>
       <Head>
         <title>Register</title>
       </Head>
@@ -201,6 +200,6 @@ export default function Register() {
           </Link>
         </p>
       </section>
-    </Layout>
+    </>
   );
 }
