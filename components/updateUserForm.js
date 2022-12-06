@@ -1,23 +1,27 @@
-import { BiBrush } from "react-icons/bi";
-import { updatedSuccessfullyAlert } from "../utils/alerts";
-import Bug from "./bug";
 import { useQuery, useMutation, useQueryClient } from "react-query";
+import { BiBrush } from "react-icons/bi";
 import { getUser, getUsers, updateUser } from "../lib/helper";
+import Bug from "./bug";
+import { updatedSuccessfullyAlert } from "../utils/alerts";
 
 export default function UpdateUserForm({ formId, formData, setFormData }) {
   const queryClient = useQueryClient();
   const { isLoading, isError, data, error } = useQuery(["users", formId], () =>
     getUser(formId)
   );
+
+  /* A react-query mutation hook. It is used to update the data in the database. */
   const UpdateMutation = useMutation((newData) => updateUser(formId, newData), {
     onSuccess: async (data) => {
-      // queryClient.setQueryData('users', (old) => [data])
       queryClient.prefetchQuery("users", getUsers);
     },
   });
 
   if (isLoading) return <div>Loading...!</div>;
   if (isError) return <div>Error</div>;
+
+  /* Destructuring the data object and splitting the name into firstname and
+ lastname. */
 
   const { name, avatar, salary, date, email, status } = data;
   const [firstname, lastname] = name ? name.split(" ") : formData;
@@ -40,7 +44,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
           onChange={setFormData}
           defaultValue={firstname}
           name="firstname"
-          className="border w-full px-5 py-3 focus:outline-none rounded-md"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="FirstName"
         />
       </div>
@@ -50,27 +54,28 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
           onChange={setFormData}
           defaultValue={lastname}
           name="lastname"
-          className="border w-full px-5 py-3 focus:outline-none rounded-md"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="LastName"
         />
       </div>
       <div className="input-type">
         <input
-          type="text"
+          type="email"
           onChange={setFormData}
           defaultValue={email}
           name="email"
-          className="border w-full px-5 py-3 focus:outline-none rounded-md"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="Email"
         />
       </div>
       <div className="input-type">
         <input
-          type="text"
           onChange={setFormData}
           defaultValue={salary}
+          type="number"
           name="salary"
-          className="border w-full px-5 py-3 focus:outline-none rounded-md"
+          autoComplete="off"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="Salary"
         />
       </div>
@@ -80,11 +85,9 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
           onChange={setFormData}
           defaultValue={date}
           name="date"
-          className="border px-5 py-3 focus:outline-none rounded-md"
-          placeholder="Salary"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
         />
       </div>
-
       <div className="flex gap-10 items-center">
         <div className="form-check">
           <input
@@ -94,7 +97,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
             value="Active"
             id="radioDefault1"
             name="status"
-            className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300  bg-white checked:bg-green-500 checked:border-green-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+            className="form-check-input appearance-none rounded-full h-4 w-4 mx-12 mb--80 border border-gray-700 bg-white checked:bg-green-500 checked:border-green-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer focus:border-gray-900"
           />
           <label htmlFor="radioDefault1" className="inline-block tet-gray-800">
             Active
@@ -108,7 +111,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
             value="Inactive"
             id="radioDefault2"
             name="status"
-            className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300  bg-white checked:bg-rose-500 checked:border-rose-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+            className="form-check-input appearance-none rounded-full h-4 w-4 mx-2 mb--40  border border-gray-700  bg-white checked:bg-rose-500 checked:border-rose-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer focus:border-gray-900"
           />
           <label htmlFor="radioDefault2" className="inline-block tet-gray-800">
             Inactive
@@ -116,7 +119,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
         </div>
       </div>
 
-      <button className="flex justify-center text-md w-2/6 bg-yellow-400 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-green-500 hover:text-green-500">
+      <button className="flex justify-center text-md w-4/6 bg-purple-400 text-white px-4 py-4 border rounded-md font-bold hover:bg-purple-200 hover:border-purple-500 hover:text-green-500">
         Update
         <span className="px-1">
           <BiBrush size={24}></BiBrush>

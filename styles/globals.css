@@ -16,3 +16,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+  body {
+  background: transparent;
+ }
+  

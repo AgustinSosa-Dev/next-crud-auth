@@ -1,31 +1,37 @@
+/* Form starting stylings ------------------------------- */
+.sign_form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  width: auto;
+  text-align: center;
+  font-weight: semi-bold;
+}
 
-.input_group {
-    @apply flex border rounded-xl;
+.group { 
+    @apply flex ;
     position: relative;
+    margin-bottom:50px; 
+}
+
+.input_form {
+  font-size: 18px;
+  padding: 10px 10px 10px 0px;
+  border-bottom: 4px solid #525;
+  width: 100px;
+}
+
+  .input_form:focus {
+  outline: none
 }
 
 .input_text {
-    @apply w-full py-4 px-6 border rounded-xl bg-slate-50;
-    @apply focus:outline-none border-none;
-}
-
-.button:enabled {
-    @apply w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md;
-    @apply py-3 text-gray-50 text-lg cursor-pointer;
-}
-
-
-.button:disabled {
-    @apply w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md;
-    @apply py-3 text-neutral-100 text-lg opacity-40 cursor-not-allowed;
-}
-.button:hover {
-    @apply bg-gradient-to-r from-gray-50 to-gray-100 border-blue-500;
-    @apply text-gray-700 border;
-}
-
-.button_custom {
-    @apply w-full border py-3 flex justify-center gap-2 hover:bg-gray-200;
+    @apply lg:w-80 md:w-auto sm:w-auto py-4  bg-slate-50;
+    @apply focus:outline-none focus:bg-purple-200;
 }
 
 .input_text + * {
@@ -47,3 +53,21 @@
 }
 
 
+.button:enabled {
+    @apply w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md;
+    @apply py-3 text-gray-50 text-lg cursor-pointer;
+}
+
+
+.button:disabled {
+    @apply w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md;
+    @apply py-3 text-neutral-100 text-lg opacity-40 cursor-not-allowed;
+}
+.button:hover {
+    @apply bg-gradient-to-r from-gray-50 to-gray-100 border-blue-500;
+    @apply text-gray-700 border;
+}
+
+.button {
+    @apply w-full border py-3 flex justify-center gap-2 hover:bg-gray-200;
+}

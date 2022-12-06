@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  client: { toggleForm: false, formId: undefined, deleteId: null },
+  client: {
+    toggleForm: false,
+    formId: undefined,
+    deleteId: null,
+  },
 };
 
 export const ReducerSlice = createSlice({

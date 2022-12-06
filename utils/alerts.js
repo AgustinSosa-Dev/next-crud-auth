@@ -1,15 +1,24 @@
+import Swal from "sweetalert2";
 import swal from "sweetalert";
 
-export function successAlert() {
-  swal({
-    title: "Great!",
-    text: "Employee added successfully",
+function successAlert() {
+  Swal.fire({
+    title: "<strong>Good Job <u>example</u></strong>",
     icon: "success",
-    timer: 3000,
+    html:
+      "You can use <b>bold text</b>, " +
+      '<a href="//sweetalert2.github.io">links</a> ' +
+      "and other HTML tags",
+    showCloseButton: true,
+    focusConfirm: false,
+    confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+    confirmButtonAriaLabel: "Thumbs up, great!",
+    cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+    cancelButtonAriaLabel: "Thumbs down",
   });
 }
 
-export function infoAlert() {
+function infoAlert() {
   swal({
     title: "Good job!",
     text: "Employee Modified Successfully.",
@@ -18,16 +27,11 @@ export function infoAlert() {
   });
 }
 
-export function deletedSuccessfullyAlert() {
-  swal({
-    title: "Excellent!",
-    text: "Employee deleted successfully",
-    icon: "success",
-    timer: 3000,
-  });
+function deletedSuccessfullyAlert() {
+  Swal.fire("Good job!", "You clicked the button!", "success");
 }
 
-export function updatedSuccessfullyAlert() {
+function updatedSuccessfullyAlert() {
   swal({
     title: "Perfect!",
     text: "Employee updated successfully",
@@ -35,3 +39,10 @@ export function updatedSuccessfullyAlert() {
     timer: 3000,
   });
 }
+
+export {
+  successAlert,
+  infoAlert,
+  deletedSuccessfullyAlert,
+  updatedSuccessfullyAlert,
+};

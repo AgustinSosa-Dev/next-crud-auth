@@ -1,8 +1,8 @@
-import "../styles/globals.css";
+import { SessionProvider } from "next-auth/react";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
-import { SessionProvider } from "next-auth/react";
+import "../styles/globals.css";
 
 //Create client
 const queryClient = new QueryClient();

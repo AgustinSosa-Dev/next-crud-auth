@@ -1,25 +1,34 @@
 import Head from "next/head";
-import Layout from "../layout/layout";
-import Link from "next/link";
-import styles from "../styles/Form.module.css";
-import Image from "next/image";
-import { HiAtSymbol } from "react-icons/hi";
-import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter } from "next/router";
+import { HiAtSymbol } from "react-icons/hi";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { BiErrorCircle } from "react-icons/bi";
+import styles from "../styles/Form.module.css";
+import RegisterPrueba from "../components/auth/registerPrueba";
+import * as Component from "../components/auth/styled/Components";
+import RightPanel from "../components/auth/rightPanel";
+import LeftPanel from "../components/auth/leftPanel";
 
 function InputErrorMessage({ touched, errors, inputName }) {
   return (
-    <span className="text-sm	text-rose-600 font-bold py-2">
-      {touched[inputName] && errors[inputName]}
+    <span className="text-sm	text-rose-600">
+      {touched[inputName] && errors[inputName] ? (
+        <BiErrorCircle size={25}>
+          touched[inputName] && errors[inputName]
+        </BiErrorCircle>
+      ) : (
+        ""
+      )}
     </span>
   );
 }
-
-export default function Login() {
+const loginPrueba = () => {
+  const [SignIn, toggle] = useState(true);
   const [show, setShow] = useState(false);
   const router = useRouter();
 
@@ -31,6 +40,7 @@ export default function Login() {
     dirty,
     isSubmitting,
     handleChange,
+    resetForm,
     values,
     handleSubmit,
   } = useFormik({
@@ -55,7 +65,8 @@ export default function Login() {
     touched,
     errors,
   };
-  async function onSubmit(values) {
+
+  async function onSubmit(values, actions) {
     const status = await signIn("credentials", {
       redirect: false,
       email: values.email,
@@ -63,7 +74,9 @@ export default function Login() {
       callbackUrl: "/",
     });
     if (status.ok) router.push(status.url);
+    actions.resetForm();
   }
+
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", { callbackUrl: "http://localhost:3000" });
@@ -74,103 +87,163 @@ export default function Login() {
     signIn("github", { callbackUrl: "http://localhost:3000" });
   }
 
-  return (
-    <Layout>
-      <Head>
-        <title>Login</title>
-      </Head>
-      <section className="w-3/4 mx-auto flex flex-col gap-10">
-        <div className="title">
-          <h1 className="text-gray-800 text-4xl font-bold py-4">Explore</h1>
-          <p className="w-3/4 mx-auto text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. optio vero
-            dignissimos?
-          </p>
-        </div>
+  async function handleFacebookSignIn() {
+    signIn("facebook", { callbackUrl: "http://localhost:3000" });
+  }
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <div className={styles.input_group}>
-            <input
-              type="email"
-              name="email"
-              placeholder="example@email.com"
-              autoComplete="off"
-              onChange={handleChange}
-              value={values.email}
-              className={styles.input_text}
-              {...getFieldProps("email")}
-            />
-            <span className="icon flex items-center px-4">
-              <HiAtSymbol size={25} />
-            </span>
-          </div>
-          <InputErrorMessage {...defaultErrorMessageProps} inputName="email" />
-          <div className={styles.input_group}>
-            <input
-              type={`${show ? "text" : "password"}`}
-              name="password"
-              placeholder="Password"
-              autoComplete="off"
-              onChange={handleChange}
-              value={values.password}
-              className={styles.input_text}
-              {...getFieldProps("password")}
-            />
-            <span
-              className="icon flex items-center px-4"
-              onClick={() => setShow(!show)}
-            >
-              {show ? (
-                <BsFillEyeFill size={25} />
-              ) : (
-                <BsFillEyeSlashFill size={25} />
-              )}
-            </span>
-          </div>
-          <InputErrorMessage
-            {...defaultErrorMessageProps}
-            inputName="password"
-          />
-          {/* login buttons*/}
-          <div className="input-button">
-            <button
-              type="submit"
-              className={styles.button}
-              disabled={!(isValid && dirty) || isSubmitting}
-            >
-              {isSubmitting ? "" : "Login"}
-              {isSubmitting ? <p>Login your credentials</p> : null}
-            </button>
-          </div>
-          <div className="input-button">
-            <button
-              type="button"
-              onClick={handleGoogleSignIn}
-              className={styles.button_custom}
-            >
-              Sign in with Google
-              <Image src={"/assets/google.svg"} width="20" height={20}></Image>
-            </button>
-          </div>
-          <div className="input-button">
-            <button
-              onClick={handleGithubSignIn}
-              type="button"
-              className={styles.button_custom}
-            >
-              Sign in with Github
-              <Image src={"/assets/github.svg"} width={25} height={25}></Image>
-            </button>
-          </div>
-        </form>
-        {/* Bottom*/}
-        <p className="text-center text-gray-400">
-          don't have an account yet?
-          <Link href={"/register"}>
-            <a className="text-blue-700 px-2 hover:underline">Sign Up</a>
-          </Link>
-        </p>
-      </section>
-    </Layout>
+  return (
+    <Component.MainContainer>
+      <Component.Container>
+        <Head>
+          <title>Login</title>
+        </Head>
+        <RegisterPrueba></RegisterPrueba>
+        <Component.SignInContainer signinIn={SignIn}>
+          <form
+            onSubmit={handleSubmit}
+            className={`flex flex-col gap-2 ${styles.sign_form}`}
+          >
+            <Component.Title className="text-5xl text-purple-500 pb-12 capitalize">
+              Log in
+            </Component.Title>
+            <div>
+              <Component.SocialButton
+                className="animate-bounce hover:animate-none"
+                onClick={handleGoogleSignIn}
+              >
+                <Image
+                  src={"/assets/google.svg"}
+                  width={35}
+                  height={35}
+                ></Image>
+              </Component.SocialButton>
+              <Component.SocialButton
+                className="animate-bounce hover:animate-none"
+                onClick={handleGithubSignIn}
+              >
+                <Image
+                  src={"/assets/github.svg"}
+                  width={50}
+                  height={50}
+                ></Image>
+              </Component.SocialButton>
+              <Component.SocialButton
+                className="animate-bounce hover:animate-none"
+                onClick={handleFacebookSignIn}
+              >
+                <Image
+                  src={"/assets/facebook.svg"}
+                  width={40}
+                  height={40}
+                ></Image>
+              </Component.SocialButton>
+            </div>
+
+            <Component.TitleLevel3 className="text-2xl pt-5">
+              or
+            </Component.TitleLevel3>
+            <Component.Title className="text-3xl text-sky-700 capitalize opacity-60 animate-pulse pb-9 pt-6">
+              Sign up with email
+            </Component.Title>
+            <div className={styles.group}>
+              <InputErrorMessage
+                {...defaultErrorMessageProps}
+                inputName="email"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="example@email.com"
+                autoComplete="off"
+                onChange={handleChange}
+                value={values.email}
+                className={`${styles.input_text} ${styles.input_form}`}
+                {...getFieldProps("email")}
+              />
+              <span className="flex items-center px-4">
+                <HiAtSymbol
+                  size={25}
+                  title="Please enter a valid email format."
+                />
+              </span>
+            </div>
+            <div className={styles.group}>
+              <InputErrorMessage
+                {...defaultErrorMessageProps}
+                inputName="password"
+              />
+              <input
+                type={`${show ? "text" : "password"}`}
+                name="password"
+                placeholder="Password"
+                autoComplete="off"
+                onChange={handleChange}
+                value={values.password}
+                className={`${styles.input_text} ${styles.input_form}`}
+                {...getFieldProps("password")}
+              />
+              <span
+                className="icon flex items-center px-4"
+                onClick={() => setShow(!show)}
+              >
+                {show ? (
+                  <BsFillEyeFill
+                    size={25}
+                    title="Click me to hide your password."
+                  />
+                ) : (
+                  <BsFillEyeSlashFill
+                    size={25}
+                    title="Click me to see your password."
+                  />
+                )}
+              </span>
+            </div>
+            {/* login buttons*/}
+            <div>
+              <Component.Button
+                type="submit"
+                className={styles.button}
+                disabled={!(isValid && dirty) || isSubmitting}
+              >
+                {isSubmitting ? "" : "Login"}
+                {isSubmitting ? <p>Login your credentials</p> : null}
+              </Component.Button>
+            </div>
+          </form>
+        </Component.SignInContainer>
+        <Component.OverlayContainer signinIn={SignIn}>
+          <Component.Overlay signinIn={SignIn}>
+            <Component.LeftOverlayPanel signinIn={SignIn}>
+              <LeftPanel></LeftPanel>
+              <Component.SignInButton
+                type="reset"
+                onClick={() => {
+                  toggle(true);
+                  resetForm();
+                }}
+              >
+                Sign In
+              </Component.SignInButton>
+            </Component.LeftOverlayPanel>
+
+            <Component.RightOverlayPanel signinIn={SignIn}>
+              <RightPanel reset={resetForm}></RightPanel>
+
+              <Component.SignUpButton
+                onClick={() => {
+                  toggle(false);
+                  resetForm();
+                }}
+                type="reset"
+              >
+                Sign Up
+              </Component.SignUpButton>
+            </Component.RightOverlayPanel>
+          </Component.Overlay>
+        </Component.OverlayContainer>
+      </Component.Container>
+    </Component.MainContainer>
   );
-}
+};
+export default loginPrueba;

@@ -73,3 +73,13 @@ export async function deleteUser(req, res) {
     res.status(404).json({ error: "Error While Deleting the User...!" });
   }
 }
+
+export async function deleteUsers(req, res) {
+  try {
+    const users = await Employees.remove({});
+    if (!users) return res.status(404).json({ error: "Data not Found" });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(404).json({ error: "Error While Fetching Data" });
+  }
+}

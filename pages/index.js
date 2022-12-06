@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Guest from "../components/guest";
-import AuthorizeUser from "../components/authorizeUser";
+import Guest from "../components/auth/guest";
+import AuthorizeUser from "../components/auth/authorizeUser";
 import { getSession, useSession } from "next-auth/react";
 
 export default function Home() {

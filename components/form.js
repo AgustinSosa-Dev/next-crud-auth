@@ -1,7 +1,7 @@
-import UpdateUserForm from "./updateUserForm";
-import AddUserForm from "./addUserForm";
-import { useSelector } from "react-redux";
 import { useReducer } from "react";
+import { useSelector } from "react-redux";
+import AddUserForm from "./AddUserForm";
+import UpdateUserForm from "./updateUserForm";
 
 const formReducer = (state, event) => {
   return {
@@ -12,10 +12,12 @@ const formReducer = (state, event) => {
 
 export default function Form() {
   const [formData, setFormData] = useReducer(formReducer, {});
-  const formId = useSelector((state) => state.app.client.formId);
+
+  /* Getting the formId from the redux store. */
+  const formId = useSelector((state) => state?.app?.client?.formId);
 
   return (
-    <div className="container mx-auto py-5">
+    <div className="container mx-auto py-5 font-semibold px-3 ">
       {formId
         ? UpdateUserForm({ formId, formData, setFormData })
         : AddUserForm({ formData, setFormData })}

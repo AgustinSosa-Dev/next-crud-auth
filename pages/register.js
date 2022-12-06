@@ -102,7 +102,7 @@ export default function Register() {
               placeholder="Username"
               onChange={handleChange}
               value={values.username}
-              className={styles.input_text}
+              className={`${styles.input_text} ${styles.input_form}`}
               {...getFieldProps("username")}
             />
             <span className="icon flex items-center px-4">
@@ -121,7 +121,7 @@ export default function Register() {
               placeholder="Email"
               onChange={handleChange}
               value={values.email}
-              className={styles.input_text}
+              className={`${styles.input_text} ${styles.input_form}`}
               {...getFieldProps("email")}
             />
             <span className="icon flex items-center px-4">
@@ -137,7 +137,7 @@ export default function Register() {
               placeholder="Password"
               onChange={handleChange}
               value={values.password}
-              className={styles.input_text}
+              className={`${styles.input_text} ${styles.input_form}`}
               {...getFieldProps("password")}
             />
             <span
@@ -163,7 +163,7 @@ export default function Register() {
               placeholder="Confirm Password"
               onChange={handleChange}
               value={values.cpassword}
-              className={styles.input_text}
+              className={`${styles.input_text} ${styles.input_form}`}
               {...getFieldProps("cpassword")}
             />
             <span

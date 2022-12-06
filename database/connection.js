@@ -11,7 +11,7 @@ const connectMongo = async () => {
   }
 };
 
-export const connMongo = async () => {
+const connMongo = async () => {
   try {
     const { connection } = await mongoose.connect(process.env.MONGO_URI);
     if (connection.readyState == 1) {
@@ -22,4 +22,4 @@ export const connMongo = async () => {
   }
 };
 
-export default connectMongo;
+export { connectMongo, connMongo };
