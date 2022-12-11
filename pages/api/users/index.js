@@ -1,9 +1,9 @@
-import { connectMongo } from "../../../database/connection";
+import connectMongo from "../../../database/conn";
 import {
-  deleteUser,
   getUsers,
   postUser,
   putUser,
+  deleteUser,
 } from "../../../database/controller";
 
 export default async function handler(req, res) {

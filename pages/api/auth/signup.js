@@ -1,9 +1,9 @@
-import { connMongo } from "../../../database/connection";
+import connectMongo from "../../../database/conn";
 import Users from "../../../model/Schema";
 import { hash } from "bcryptjs";
 
 export default async function handler(req, res) {
-  connMongo().catch((error) => res.json({ error: "Connection Failed...!" }));
+  connectMongo().catch((error) => res.json({ error: "Connection Failed...!" }));
 
   // only post method is accepted
   if (req.method === "POST") {
@@ -12,14 +12,9 @@ export default async function handler(req, res) {
     const { username, email, password } = req.body;
 
     // check duplicate users
-    const checkExisting = await Users.findOne({ email });
-    if (checkExisting)
+    const checkexisting = await Users.findOne({ email });
+    if (checkexisting)
       return res.status(422).json({ message: "User Already Exists...!" });
-
-    // check duplicate username
-    const checkUsernameExisting = await Users.findOne({ username });
-    if (checkUsernameExisting)
-      return res.status(422).json({ message: "Username Already Exists...!" });
 
     // hash password
     Users.create(

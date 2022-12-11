@@ -2,9 +2,8 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
-
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connMongo } from "../../../database/connection";
+import connectMongo from "../../../database/conn";
 import Users from "../../../model/Schema";
 import { compare } from "bcryptjs";
 
@@ -26,7 +25,7 @@ export default NextAuth({
     CredentialsProvider({
       name: "credentials",
       async authorize(credentials, req) {
-        connMongo().catch((error) => {
+        connectMongo().catch((error) => {
           error: "Connection Failed...!";
         });
 

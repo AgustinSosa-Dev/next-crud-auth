@@ -40,9 +40,27 @@ export default function Table() {
           </tr>
         </thead>
         <tbody className="bg-gray-200">
-          {data.map((obj, i) => (
+          {/* {data.map((obj, i) => (
+            <Tr {...obj} key={i} />
+          ))} */}
+
+          {/* {data.map((obj, i) => (
+            <Tr {...obj} key={i} />
+          ))} */}
+
+          {/* {Object.values(data) != null && Object.values(data) != undefined
+            ? Object.values(data).map((obj, i) => <Tr {...obj} key={i}></Tr>)
+            : ""} */}
+
+          {Object.values(data).map((obj, i) => (
             <Tr {...obj} key={i}></Tr>
           ))}
+
+          {/* <tr key={idx}>
+            {Object.values(data).map((newdata, idx2) => (
+              <td key={idx2}>{newdata}</td>
+            ))}
+          </tr> */}
         </tbody>
       </table>
     </div>

@@ -1,4 +1,4 @@
-import { connectMongo } from "../../database/connection";
+import connectMongo from "../../database/conn";
 
 export default function handler(req, res) {
   connectMongo();

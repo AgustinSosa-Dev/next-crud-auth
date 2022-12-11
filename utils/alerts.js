@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-import swal from "sweetalert";
 
 function successAlert() {
   Swal.fire({
@@ -18,8 +17,37 @@ function successAlert() {
   });
 }
 
+const deletedSuccessfullyAlert = async () => {
+  const swalWithTaildwind = Swal.mixin({
+    customClass: {
+      cancelButton:
+        "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-12 rounded-full",
+    },
+    buttonsStyling: false,
+  });
+  swalWithTaildwind
+    .fire({
+      title: "Cancelled",
+      text: "Your imaginary file is safe :)",
+      icon: "error",
+      cancelButtonText: "Ok",
+      reverseButtons: true,
+    })
+    .then((result) => {
+      if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithTaildwind.fire(
+          "Cancelled",
+          "Your imaginary file is safe :)",
+          "error"
+        );
+      } else {
+        null;
+      }
+    });
+};
+
 function infoAlert() {
-  swal({
+  Swal.fire({
     title: "Good job!",
     text: "Employee Modified Successfully.",
     icon: "info",
@@ -27,12 +55,12 @@ function infoAlert() {
   });
 }
 
-function deletedSuccessfullyAlert() {
-  Swal.fire("Good job!", "You clicked the button!", "success");
-}
+// function deletedSuccessfullyAlert() {
+//   Swal.fire("Good job!", "You clicked the button!", "success");
+// }
 
 function updatedSuccessfullyAlert() {
-  swal({
+  Swal.fire({
     title: "Perfect!",
     text: "Employee updated successfully",
     icon: "info",

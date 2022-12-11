@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { store } from "../redux/store";
@@ -9,13 +10,23 @@ const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <SessionProvider session={pageProps.session}>
-          <Component {...pageProps} />
-        </SessionProvider>
-      </Provider>
-    </QueryClientProvider>
+    <>
+      <Head>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/images/favicon.png"
+        />
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <SessionProvider session={pageProps.session}>
+            <Component {...pageProps} />
+          </SessionProvider>
+        </Provider>
+      </QueryClientProvider>
+    </>
   );
 }
 

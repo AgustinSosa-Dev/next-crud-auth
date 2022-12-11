@@ -4,10 +4,9 @@ import Employees from "../model/employee";
 // get : http://localhost:3000/api/users
 export async function getUsers(req, res) {
   try {
-    const users = await Employees.find({});
-
-    if (!users) return res.status(404).json({ error: "Data not Found" });
-    res.status(200).json(users);
+    const employees = await Employees.find({});
+    if (!employees) return res.status(404).json({ error: "Data not Found" });
+    res.status(200).json(employees);
   } catch (error) {
     res.status(404).json({ error: "Error While Fetching Data" });
   }
@@ -17,10 +16,9 @@ export async function getUsers(req, res) {
 export async function getUser(req, res) {
   try {
     const { userId } = req.query;
-
     if (userId) {
-      const user = await Employees.findById(userId);
-      res.status(200).json(user);
+      const employee = await Employees.findById(userId);
+      res.status(200).json(employee);
     }
     res.status(404).json({ error: "User not Selected...!" });
   } catch (error) {
@@ -49,8 +47,8 @@ export async function putUser(req, res) {
     const formData = req.body;
 
     if (userId && formData) {
-      const user = await Employees.findByIdAndUpdate(userId, formData);
-      res.status(200).json(user);
+      const employee = await Employees.findByIdAndUpdate(userId, formData);
+      res.status(200).json(employee);
     }
     res.status(404).json({ error: "User Not Selected...!" });
   } catch (error) {
@@ -64,22 +62,12 @@ export async function deleteUser(req, res) {
     const { userId } = req.query;
 
     if (userId) {
-      const user = await Employees.findByIdAndDelete(userId);
-      return res.status(200).json(user);
+      const employee = await Employees.findByIdAndDelete(userId);
+      return res.status(200).json(employee);
     }
 
     res.status(404).json({ error: "User Not Selected...!" });
   } catch (error) {
     res.status(404).json({ error: "Error While Deleting the User...!" });
-  }
-}
-
-export async function deleteUsers(req, res) {
-  try {
-    const users = await Employees.remove({});
-    if (!users) return res.status(404).json({ error: "Data not Found" });
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(404).json({ error: "Error While Fetching Data" });
   }
 }

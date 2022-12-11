@@ -3,20 +3,20 @@
     display: table;
 }
 
-.texto_animado {
+.animate_text {
     float: left;
     position: relative;
     font-size: 3em;
     mix-blend-mode: screen; 
 }
 
-.texto_animado .space {
+.animate_text .space {
     position: absolute;
     right: 0;
     width: 0;
     background: white;
     border-left: 5px #ccc solid;
-    animation: typing 3s infinite backwards steps(70);
+    animation: typing 3s infinite backwards steps(80);
 }
 
 @keyframes typing {
@@ -115,7 +115,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: ring 2s infinite;
+    animation: ring 1.5s infinite;
   }
   
   .profile_button:hover::after, .profile_button:focus::after {
@@ -125,13 +125,13 @@
   
   @keyframes ring {
     0% {
-      width: 50px;
-      height: 50px;
+      width: 100px;
+      height: 100px;
       opacity: 1;
     }
     100% {
-      width: 250px;
-      height: 250px;
+      width: 200px;
+      height: 200px;
       opacity: 0;
     }
   }
