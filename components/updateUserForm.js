@@ -1,8 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { BiBrush } from "react-icons/bi";
 import { getUser, getUsers, updateUser } from "../lib/helper";
-import Bug from "./bug";
-import { updatedSuccessfullyAlert } from "../utils/alerts";
+import { updatedEmployeeAlert } from "../utils/alerts";
 
 export default function UpdateUserForm({ formId, formData, setFormData }) {
   const queryClient = useQueryClient();
@@ -33,7 +32,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
     }`;
     let updated = Object.assign({}, data, formData, { name: userName });
     await UpdateMutation.mutate(updated);
-    updatedSuccessfullyAlert();
+    updatedEmployeeAlert();
   };
 
   return (
@@ -46,6 +45,10 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
           name="firstname"
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="FirstName"
+          pattern="^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$"
+          minLength={3}
+          maxLength={25}
+          required
         />
       </div>
       <div className="input-type">
@@ -56,6 +59,10 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
           name="lastname"
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="LastName"
+          pattern="^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$"
+          minLength={3}
+          maxLength={20}
+          required
         />
       </div>
       <div className="input-type">
@@ -64,8 +71,11 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
           onChange={setFormData}
           defaultValue={email}
           name="email"
+          maxLength={255}
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="Email"
+          required
+          pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
         />
       </div>
       <div className="input-type">
@@ -77,6 +87,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
           autoComplete="off"
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="Salary"
+          required
         />
       </div>
       <div className="input-type">

@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { addUser, getUsers } from "../lib/helper";
 import Bug from "./bug";
 import { BiPlus } from "react-icons/bi";
-import { successAlert } from "../utils/alerts";
+import { successEmployeeAlert } from "../utils/alerts";
 
 /**
  * It returns a span element with a className of "text-sm	text-rose-600 font-bold
@@ -47,11 +47,27 @@ export default function AddUserForm(formData, setFormData) {
       salary: "",
     },
     validationSchema: Yup.object().shape({
-      firstname: Yup.string().required("Firstname is required"),
-      lastname: Yup.string().required("Lastname is required"),
+      firstname: Yup.string()
+        .required("Firstname is required")
+        .min(3, "Minimum characters allowed: Three (3).")
+        .matches(
+          /^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/,
+          "The First Name must contain only letters and can contain accents, hyphens and spaces."
+        ),
+      lastname: Yup.string()
+        .required("Lastname is required")
+        .min(3, "Minimum characters allowed: Three (3).")
+        .matches(
+          /^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/,
+          "The First Name must contain only letters and can contain accents, hyphens and spaces."
+        ),
       email: Yup.string()
         .email("Invalid email format")
-        .required("Email is required"),
+        .required("Email is required")
+        .matches(
+          /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+          "Please enter a valid email format."
+        ),
       salary: Yup.number()
         .positive("The Value must be a positive number.")
         .lessThan(15000, "The value must be less than US$15000.")
@@ -89,7 +105,7 @@ export default function AddUserForm(formData, setFormData) {
       status: currentRadio,
     };
     addMutation.mutate(model);
-    successAlert();
+    successEmployeeAlert();
   }
 
   if (addMutation.isLoading) return <div>Loading!</div>;
@@ -111,6 +127,8 @@ export default function AddUserForm(formData, setFormData) {
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           autoComplete="off"
           placeholder="FirstName"
+          minLength={3}
+          maxLength={25}
           {...getFieldProps("firstname")}
         />
         <InputErrorMessage
@@ -126,6 +144,8 @@ export default function AddUserForm(formData, setFormData) {
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           autoComplete="off"
           placeholder="LastName"
+          minLength={3}
+          maxLength={25}
           {...getFieldProps("lastname")}
         />
         <InputErrorMessage {...defaultErrorMessageProps} inputName="lastname" />
@@ -135,6 +155,7 @@ export default function AddUserForm(formData, setFormData) {
           type="email"
           onChange={setFormData}
           name="email"
+          maxLength={255}
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           autoComplete="off"
           placeholder="Email"
@@ -150,6 +171,7 @@ export default function AddUserForm(formData, setFormData) {
           autoComplete="off"
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
           placeholder="Salary"
+          maxLength={255}
           {...getFieldProps("salary")}
         />
         <InputErrorMessage {...defaultErrorMessageProps} inputName="salary" />
@@ -168,7 +190,7 @@ export default function AddUserForm(formData, setFormData) {
           <input
             type="radio"
             onChange={handleRadio || setFormData}
-            value="Active"
+            defaultValue="Active"
             id="radio1"
             checked={currentRadio == "Active" ? true : false}
             name="status"
@@ -182,7 +204,7 @@ export default function AddUserForm(formData, setFormData) {
           <input
             type="radio"
             onChange={handleRadio || setFormData}
-            value="Inactive"
+            defaultValue="Inactive"
             id="radio2"
             checked={currentRadio == "Inactive" ? true : false}
             name="status"

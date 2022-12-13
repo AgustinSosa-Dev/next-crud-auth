@@ -13,6 +13,7 @@ import RegisterPanel from "../components/auth/registerPanel";
 import * as Component from "../components/auth/styled/Components";
 import RightPanel from "../components/auth/rightPanel";
 import LeftPanel from "../components/auth/leftPanel";
+import { getSession, useSession } from "next-auth/react";
 
 function InputErrorMessage({ touched, errors, inputName }) {
   return (
@@ -52,11 +53,18 @@ const loginPrueba = () => {
     validationSchema: Yup.object().shape({
       email: Yup.string()
         .email("Invalid email format")
-        .required("Email is required"),
+        .required("Email is required")
+        .matches(
+          /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+          "Please enter a valid email format."
+        ),
       password: Yup.string()
         .required("Password is required")
         .min(8, "Password too short. Min - 8 characters")
-        .max(18, "Password too Long. Max - 18 characters"),
+        .max(18, "Password too Long. Max - 18 characters")
+        .matches(
+          /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/
+        ),
     }),
     onSubmit,
   });
@@ -145,7 +153,7 @@ const loginPrueba = () => {
               or
             </Component.TitleLevel3>
             <Component.Title className="text-3xl text-sky-700 capitalize opacity-60 animate-pulse pb-9 pt-6">
-              Sign up with email
+              Sign in with email
             </Component.Title>
             <div className={styles.group}>
               <InputErrorMessage
@@ -154,6 +162,7 @@ const loginPrueba = () => {
               />
               <input
                 type="email"
+                maxLength={255}
                 name="email"
                 placeholder="example@email.com"
                 autoComplete="off"
@@ -164,7 +173,7 @@ const loginPrueba = () => {
               />
               <span className="flex items-center px-4">
                 <HiAtSymbol
-                  size={25}
+                  size={30}
                   title="Please enter a valid email format."
                 />
               </span>
@@ -190,13 +199,21 @@ const loginPrueba = () => {
               >
                 {show ? (
                   <BsFillEyeFill
-                    size={25}
-                    title="Click me to hide your password."
+                    size={30}
+                    title="
+                  Between 8 and 16 characters. 
+                at least one number. 
+                one capital letter. 
+                And one special character."
                   />
                 ) : (
                   <BsFillEyeSlashFill
-                    size={25}
-                    title="Click me to see your password."
+                    size={30}
+                    title="
+                  Between 8 and 16 characters. 
+                at least one number. 
+                one capital letter. 
+                And one special character."
                   />
                 )}
               </span>
@@ -249,3 +266,18 @@ const loginPrueba = () => {
   );
 };
 export default loginPrueba;
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: { session },
+  };
+}

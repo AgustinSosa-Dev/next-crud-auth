@@ -50,14 +50,22 @@ export default function RegisterPrueba() {
       username: Yup.string()
         .min(6, "Username too short. Min - 6 characters")
         .max(16, "Username too Long. Max - 16 characters")
-        .required("Username is required"),
+        .required("Username is required")
+        .matches(/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ_.-]{2,45}$/),
       email: Yup.string()
         .email("Invalid email format")
-        .required("Email is required"),
+        .required("Email is required")
+        .matches(
+          /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+          "Please enter a valid email format."
+        ),
       password: Yup.string()
         .min(8, "Password too short. Min - 8 characters")
         .max(18, "Password too Long. Max - 18 characters")
-        .required("Password is required"),
+        .required("Password is required")
+        .matches(
+          /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/
+        ),
       cpassword: Yup.string()
         .when("password", {
           is: (value) => (value && value.length > 0 ? true : false),
@@ -134,6 +142,8 @@ export default function RegisterPrueba() {
             />
             <input
               type="text"
+              minLength={6}
+              maxLength={24}
               name="username"
               placeholder="Username"
               onChange={handleChange}
@@ -142,7 +152,7 @@ export default function RegisterPrueba() {
               {...getFieldProps("username")}
             />
             <span className="icon flex items-center px-4">
-              <HiUser size={30} title="Min - 6 | Max - 16 characters." />
+              <HiUser size={30} title="Min - 6 | Max - 24 characters." />
             </span>
           </div>
           <div className={styles.group}>
@@ -152,6 +162,7 @@ export default function RegisterPrueba() {
             />
             <input
               type="email"
+              maxLength={255}
               name="email"
               placeholder="Email"
               onChange={handleChange}
@@ -188,12 +199,19 @@ export default function RegisterPrueba() {
               {show.password ? (
                 <BsFillEyeFill
                   size={30}
-                  title="Click me to hide your password."
+                  title="
+                  Between 8 and 16 characters. 
+                at least one number. 
+                one capital letter. 
+                And one special character."
                 />
               ) : (
                 <BsFillEyeSlashFill
                   size={30}
-                  title="Click me to see your password."
+                  title="
+                  Between 8 and 16 characters 
+                  and must contain at least one number, one capital letter and one special character.
+                  "
                 />
               )}
             </span>

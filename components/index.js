@@ -1,11 +1,8 @@
 export { default as AddUserForm } from "./AddUserForm";
 export * from "./auth";
 export * from "./auth/styled/Components";
-export { default as authorizeUser } from "./authorizeUser";
 export { default as bug } from "./bug";
 export { default as form } from "./form";
-export { default as guest } from "./guest";
 export { default as navBar } from "./navBar";
-export { default as registerPanel } from "./registerPanel";
 export { default as table } from "./table";
 export { default as updateUserForm } from "./updateUserForm";

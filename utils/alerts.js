@@ -1,21 +1,29 @@
 import Swal from "sweetalert2";
+import { HiHandThumbUp } from "react-icons/hi";
 
-function successAlert() {
+function successEmployeeAlert() {
+  Swal.fire("Excellent!", "Employee added successfully!", "success", 3000);
+}
+
+function updatedEmployeeAlert() {
+  Swal.fire("Great!", "Employee updated successfully!", "info");
+}
+
+const successfullyRegisteredUser = () => {
   Swal.fire({
-    title: "<strong>Good Job <u>example</u></strong>",
+    title: "<strong><u>Successful</u> registration</strong>",
     icon: "success",
     html:
       "You can use <b>bold text</b>, " +
       '<a href="//sweetalert2.github.io">links</a> ' +
       "and other HTML tags",
     showCloseButton: true,
+    showCancelButton: true,
     focusConfirm: false,
-    confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+    confirmButtonText: "<HiHandThumbUp></HiHandThumbUp> Great!",
     confirmButtonAriaLabel: "Thumbs up, great!",
-    cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-    cancelButtonAriaLabel: "Thumbs down",
   });
-}
+};
 
 const deletedSuccessfullyAlert = async () => {
   const swalWithTaildwind = Swal.mixin({
@@ -69,8 +77,8 @@ function updatedSuccessfullyAlert() {
 }
 
 export {
-  successAlert,
+  successEmployeeAlert,
+  updatedEmployeeAlert,
   infoAlert,
   deletedSuccessfullyAlert,
-  updatedSuccessfullyAlert,
 };

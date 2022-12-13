@@ -6,23 +6,30 @@
 .animate_text {
     float: left;
     position: relative;
-    font-size: 3em;
-    mix-blend-mode: screen; 
-}
+    font-size: 4em;
+    background: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    font-weight: 800;
+    padding-top: 6rem;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+  }
+
 
 .animate_text .space {
     position: absolute;
     right: 0;
     width: 0;
-    background: white;
-    border-left: 5px #ccc solid;
-    animation: typing 3s infinite backwards steps(80);
+    @apply border-l-8 bg-slate-100;
+    animation: typing 6s infinite backwards steps(50);
+    
 }
 
 @keyframes typing {
     from {
         width: 100%;
-    }
+        
+      }
     to {
         width: 0;
     }
@@ -111,7 +118,7 @@
     border-radius: 100%;
     border: 6px solid #00FFCB;
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

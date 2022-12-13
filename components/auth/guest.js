@@ -1,76 +1,55 @@
 import Link from "next/link";
-import NavBar from "../navBar";
-import styles from "../../styles/AuthorizeUser.module.css";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import BtnSignOut from "../auth/btnSignOut";
-import { HiHome, HiUser } from "react-icons/hi";
+import GuestNavBar from "../guestNavBar";
+import styles from "../../styles/Guest.module.css";
 
 export default function Guest() {
-  const router = useRouter();
-
-  function handleSignOut() {
-    signOut();
-  }
-
   return (
-    <main>
-      <nav className="flex items-center justify-between flex-wrap bg-gradient-to-br from-rose-600  p-6 w-6/6">
-        <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <Link href={"/"}>
-            <a className="mx-4 cursor-pointer">
-              <Image src={"/images/ideas.svg"} width={55} height={55}></Image>
-            </a>
-          </Link>
-          <span className="font-semibold text-2xl tracking-tight">
-            Business Ideas
-          </span>
+    <div className="overflow-hidden">
+      <main>
+        <GuestNavBar></GuestNavBar>
+        <h1 className="pt-8 text-5xl space-x-4 font-bold text-center tracking-widest capitalize bg-gradient-to-br from-red-400 text-slate-900 text-gradient-to-br via-purple-800">
+          guest page
+        </h1>
+        <div className={`pt-9 mt-4 ${styles.arrow}`}>
+          <h2 className="m-2 pt-6 uppercase text-2xl leading-loose tracking-wider font-bold text-center">
+            welcome to our guest page.
+          </h2>
         </div>
-        <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div className="text-sm lg:flex-grow">
-            <ul className="flex lg:space-x-80 md:space-x-48 lg:justify-center border-b">
-              <li className="-mb-px mr-1 cursor-pointer">
-                <Link href={"/"}>
-                  <span
-                    className={
-                      router.pathname == "/"
-                        ? "block mt-4 lg:inline-block lg:mt-0  lg:text-2xl current:text-amber-500 active border-b-4 border-slate-500 "
-                        : "opacity-30 duration-700 "
-                    }
-                  >
-                    <HiHome size={50} />
-                  </span>
-                </Link>
+        <div className={`pt-32 ${styles.wrap}`}>
+          <h3 className="pt-3 text-3xl font-bold underline">
+            Please follow the steps below:
+          </h3>
+        </div>
+        <div class={styles.container}>
+          <div class={styles.box}>
+            <ul className={styles.items}>
+              <li className={styles.item}>
+                <h3> If you already have an account.</h3>
               </li>
+              <ul className={`mt-7 ${styles["list"]}`}>
+                <li>Please, Login.</li>
+              </ul>
+            </ul>
+            <ul className={styles.items}>
+              <li className={`mt-7 ${styles.item}`}>
+                <h3>Otherwise:</h3>
+              </li>
+              <ul className={`mt-7 ${styles["list"]}`}>
+                <li>Please, create an account.</li>
+              </ul>
             </ul>
           </div>
-          <div className="cursor flex">
-            <BtnSignOut onClick={handleSignOut}></BtnSignOut>
-          </div>
         </div>
-      </nav>
-      <h3 className="text-4xl font-bold">Guest HomePage</h3>
-      <div className="flex justify-center">
-        <Link href={"/login"}>
-          <a className="mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50">
-            Sign In
-          </a>
-        </Link>
-      </div>
-    </main>
+        <h3>
+          <div className={`pt-10 ${styles.wrap}`}>
+            <Link href={"/profile"}>
+              <button type="button" className={`${styles.guest_button}`}>
+                <span>Sign In</span>
+              </button>
+            </Link>
+          </div>
+        </h3>
+      </main>
+    </div>
   );
-}
-
-{
-  /* <main className="container mx-auto text-center py-20">
-      <NavBar></NavBar>
-      <h3 className="text-4xl font-bold">Guest HomePage</h3>
-      <div className="flex justify-center">
-        <Link href={"/login"}>
-          <a className="mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50">
-            Sign In
-          </a>
-        </Link>
-      </div>
-    </main> */
 }

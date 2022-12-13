@@ -15,7 +15,7 @@ export default function Table() {
   if (isError) return <div>Got Error {error}</div>;
 
   return (
-    <div className="overflow-auto relative shadow-md sm:rounded-lg mx-3">
+    <div className="overflow-auto relative shadow-md sm:rounded-lg mx-3 ">
       <table className="min-w-full table-auto overflow-y-auto ">
         <thead>
           <tr className="bg-gray-800">
@@ -40,27 +40,10 @@ export default function Table() {
           </tr>
         </thead>
         <tbody className="bg-gray-200">
-          {/* {data.map((obj, i) => (
-            <Tr {...obj} key={i} />
-          ))} */}
-
-          {/* {data.map((obj, i) => (
-            <Tr {...obj} key={i} />
-          ))} */}
-
-          {/* {Object.values(data) != null && Object.values(data) != undefined
-            ? Object.values(data).map((obj, i) => <Tr {...obj} key={i}></Tr>)
-            : ""} */}
-
+          {/* Mapping the data from the API to the table. */}
           {Object.values(data).map((obj, i) => (
             <Tr {...obj} key={i}></Tr>
           ))}
-
-          {/* <tr key={idx}>
-            {Object.values(data).map((newdata, idx2) => (
-              <td key={idx2}>{newdata}</td>
-            ))}
-          </tr> */}
         </tbody>
       </table>
     </div>
