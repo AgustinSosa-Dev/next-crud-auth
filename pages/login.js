@@ -88,16 +88,21 @@ const loginPrueba = () => {
 
   //Google Handler Function
   async function handleGoogleSignIn() {
-    signIn("google", { callbackUrl: "http://localhost:3000" });
+    signIn("google", {
+      callbackUrl: "https://next-auth-crud-firebase.firebaseapp.com",
+    });
   }
-
   //GitHub Handler Function
   async function handleGithubSignIn() {
-    signIn("github", { callbackUrl: "http://localhost:3000" });
+    signIn("github", {
+      callbackUrl: "https://next-auth-crud-firebase.firebaseapp.com",
+    });
   }
 
   async function handleFacebookSignIn() {
-    signIn("facebook", { callbackUrl: "http://localhost:3000" });
+    signIn("facebook", {
+      callbackUrl: "https://next-auth-crud-firebase.firebaseapp.com",
+    });
   }
 
   return (

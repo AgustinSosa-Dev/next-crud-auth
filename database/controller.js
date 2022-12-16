@@ -1,7 +1,7 @@
 /** Controller */
 import Employees from "../model/employee";
 
-// get : http://localhost:3000/api/users
+// get : https://next-auth-crud-firebase.firebaseapp.com/api/users
 export async function getUsers(req, res) {
   try {
     const employees = await Employees.find({});
@@ -12,7 +12,7 @@ export async function getUsers(req, res) {
   }
 }
 
-// get : http://localhost:3000/api/users/1
+// get : https://next-auth-crud-firebase.firebaseapp.com/api/users/1
 export async function getUser(req, res) {
   try {
     const { userId } = req.query;
@@ -26,7 +26,7 @@ export async function getUser(req, res) {
   }
 }
 
-// post : http://localhost:3000/api/users
+// post : https://next-auth-crud-firebase.firebaseapp.com/api/users
 export async function postUser(req, res) {
   try {
     const formData = req.body;
@@ -40,7 +40,7 @@ export async function postUser(req, res) {
   }
 }
 
-// put : http://localhost:3000/api/users/1
+// put : https://next-auth-crud-firebase.firebaseapp.com/api/users/1
 export async function putUser(req, res) {
   try {
     const { userId } = req.query;
@@ -56,7 +56,7 @@ export async function putUser(req, res) {
   }
 }
 
-// delete : http://localhost:3000/api/users/1
+// delete : https://next-auth-crud-firebase.firebaseapp.com/api/users/1
 export async function deleteUser(req, res) {
   try {
     const { userId } = req.query;
