@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 import { useSelector } from "react-redux";
-import AddUserForm from "./AddUserForm";
+import AddUserForm from "./addUserForm";
 import UpdateUserForm from "./updateUserForm";
 
 const formReducer = (state, event) => {

@@ -1,4 +1,4 @@
-export { default as AddUserForm } from "./AddUserForm";
+export { default as addUserForm } from "./addUserForm";
 export * from "./auth";
 export * from "./auth/styled/Components";
 export { default as bug } from "./bug";
