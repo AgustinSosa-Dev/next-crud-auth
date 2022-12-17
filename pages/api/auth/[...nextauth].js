@@ -49,7 +49,7 @@ export default NextAuth({
       },
     }),
   ],
-  secret: "fLDlTjjKDlDZGTjisgKPns7CeBp5WUTMIfNSZIa+ONQ=",
+  secret: process.env.NEXT_PUBLIC_SECRET,
   session: {
     strategy: "jwt",
   },

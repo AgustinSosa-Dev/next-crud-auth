@@ -7,7 +7,6 @@ import * as Component from "./styled/Components";
 import { HiAtSymbol, HiUser } from "react-icons/hi";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { BiErrorCircle } from "react-icons/bi";
-import { successAlert } from "../../utils/alerts";
 
 function InputErrorMessage({ touched, errors, inputName }) {
   return (
@@ -91,13 +90,10 @@ export default function RegisterPrueba() {
       body: JSON.stringify(values),
     };
 
-    await fetch(
-      "https://next-auth-crud-firebase.firebaseapp.com/api/auth/signup",
-      options
-    )
+    await fetch("http://localhost:3000/api/auth/signup", options)
       .then((res) => res.json())
       .then((data) => {
-        if (data) router.push("https://next-auth-crud-firebase.firebaseapp.com");
+        if (data) router.push("http://localhost:3000");
       });
     actions.resetForm();
   }
@@ -255,7 +251,6 @@ export default function RegisterPrueba() {
             <Component.SignUpButton
               type="submit"
               className={styles.button}
-              onClick={successAlert}
               disabled={!(isValid && dirty) || isSubmitting}
             >
               Sign Up

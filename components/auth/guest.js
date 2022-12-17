@@ -20,8 +20,8 @@ export default function Guest() {
             Please follow the steps below:
           </h3>
         </div>
-        <div class={styles.container}>
-          <div class={styles.box}>
+        <div className={styles.container}>
+          <div className={styles.box}>
             <ul className={styles.items}>
               <li className={styles.item}>
                 <h3> If you already have an account.</h3>

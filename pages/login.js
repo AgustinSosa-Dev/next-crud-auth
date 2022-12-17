@@ -89,19 +89,19 @@ const loginPrueba = () => {
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", {
-      callbackUrl: "https://next-auth-crud-firebase.firebaseapp.com",
+      callbackUrl: "http://localhost:3000",
     });
   }
   //GitHub Handler Function
   async function handleGithubSignIn() {
     signIn("github", {
-      callbackUrl: "https://next-auth-crud-firebase.firebaseapp.com",
+      callbackUrl: "http://localhost:3000",
     });
   }
 
   async function handleFacebookSignIn() {
     signIn("facebook", {
-      callbackUrl: "https://next-auth-crud-firebase.firebaseapp.com",
+      callbackUrl: "http://localhost:3000",
     });
   }
 

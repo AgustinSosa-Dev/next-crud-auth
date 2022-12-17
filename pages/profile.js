@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleChangeAction, deleteAction } from "../redux/states/reducer";
 import { deleteUser, getUsers } from "../lib/helper";
 import { useQueryClient } from "react-query";
-import { deletedSuccessfullyAlert } from "../utils/alerts";
+import { deletedEmployeeAlert, cancelledEmployeeAlert } from "../utils/alerts";
 import { getSession } from "next-auth/react";
 
 export default function Profile() {
@@ -27,12 +27,13 @@ export default function Profile() {
       await deleteUser(deleteId);
       await queryclient.prefetchQuery("users", getUsers);
       dispatch(deleteAction(null));
-      deletedSuccessfullyAlert();
+      deletedEmployeeAlert();
     }
   };
 
   const cancelHandler = async () => {
     dispatch(deleteAction(null));
+    cancelledEmployeeAlert();
   };
 
   return (

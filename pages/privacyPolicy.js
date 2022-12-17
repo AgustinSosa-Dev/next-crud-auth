@@ -104,11 +104,11 @@ const privacyPolicy = () => {
           <p>
             <strong>Website</strong> refers to AuthApp, accessible from{" "}
             <a
-              href="https://next-auth-crud-firebase.firebaseapp.com"
+              href="http://localhost:3000/"
               rel="external nofollow noopener"
               target="_blank"
             >
-              https://next-auth-crud-firebase.firebaseapp.com
+              http://localhost:3000/
             </a>
           </p>
         </li>

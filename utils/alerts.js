@@ -1,31 +1,35 @@
 import Swal from "sweetalert2";
-import { HiHandThumbUp } from "react-icons/hi";
 
 function successEmployeeAlert() {
-  Swal.fire("Excellent!", "Employee added successfully!", "success", 3000);
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Employee added successfully!",
+    showConfirmButton: false,
+    timer: 4000,
+  });
 }
 
 function updatedEmployeeAlert() {
-  Swal.fire("Great!", "Employee updated successfully!", "info");
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Employee updated successfully!",
+    showConfirmButton: false,
+    timer: 4000,
+  });
 }
 
-const successfullyRegisteredUser = () => {
+function deletedEmployeeAlert() {
   Swal.fire({
-    title: "<strong><u>Successful</u> registration</strong>",
     icon: "success",
-    html:
-      "You can use <b>bold text</b>, " +
-      '<a href="//sweetalert2.github.io">links</a> ' +
-      "and other HTML tags",
-    showCloseButton: true,
-    showCancelButton: true,
-    focusConfirm: false,
-    confirmButtonText: "<HiHandThumbUp></HiHandThumbUp> Great!",
-    confirmButtonAriaLabel: "Thumbs up, great!",
+    title: "Employee deleted successfully!",
+    showConfirmButton: true,
+    timer: 4000,
   });
-};
+}
 
-const deletedSuccessfullyAlert = async () => {
+const cancelledEmployeeAlert = async () => {
   const swalWithTaildwind = Swal.mixin({
     customClass: {
       cancelButton:
@@ -36,49 +40,23 @@ const deletedSuccessfullyAlert = async () => {
   swalWithTaildwind
     .fire({
       title: "Cancelled",
-      text: "Your imaginary file is safe :)",
+      text: "Your employee is safe",
       icon: "error",
       cancelButtonText: "Ok",
       reverseButtons: true,
     })
     .then((result) => {
       if (result.dismiss === Swal.DismissReason.cancel) {
-        swalWithTaildwind.fire(
-          "Cancelled",
-          "Your imaginary file is safe :)",
-          "error"
-        );
+        swalWithTaildwind.fire("Cancelled", "Your employee is safe", "error");
       } else {
         null;
       }
     });
 };
 
-function infoAlert() {
-  Swal.fire({
-    title: "Good job!",
-    text: "Employee Modified Successfully.",
-    icon: "info",
-    timer: 5000,
-  });
-}
-
-// function deletedSuccessfullyAlert() {
-//   Swal.fire("Good job!", "You clicked the button!", "success");
-// }
-
-function updatedSuccessfullyAlert() {
-  Swal.fire({
-    title: "Perfect!",
-    text: "Employee updated successfully",
-    icon: "info",
-    timer: 3000,
-  });
-}
-
 export {
   successEmployeeAlert,
   updatedEmployeeAlert,
-  infoAlert,
-  deletedSuccessfullyAlert,
+  deletedEmployeeAlert,
+  cancelledEmployeeAlert,
 };
