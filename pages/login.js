@@ -79,7 +79,7 @@ const loginPrueba = () => {
       redirect: true,
       email: values.email,
       password: values.password,
-      callbackUrl: "/",
+      callbackUrl: "/https://next-crud-auth.netlify.app/",
     });
     actions.resetForm();
 
