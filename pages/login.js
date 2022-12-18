@@ -89,8 +89,7 @@ const loginPrueba = () => {
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", {
-      callbackUrl:
-        "https://next-crud-auth.netlify.app/api/auth/callback/google",
+      callbackUrl: "https://next-crud-auth.netlify.app",
     });
   }
   //GitHub Handler Function
