@@ -89,19 +89,19 @@ const loginPrueba = () => {
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", {
-      callbackUrl: "http://localhost:3000",
+      callbackUrl: "https://next-crud-auth.netlify.app",
     });
   }
   //GitHub Handler Function
   async function handleGithubSignIn() {
     signIn("github", {
-      callbackUrl: "http://localhost:3000",
+      callbackUrl: "https://next-crud-auth.netlify.app",
     });
   }
 
   async function handleFacebookSignIn() {
     signIn("facebook", {
-      callbackUrl: "http://localhost:3000",
+      callbackUrl: "https://next-crud-auth.netlify.app",
     });
   }
 
