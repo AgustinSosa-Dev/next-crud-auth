@@ -76,7 +76,7 @@ const loginPrueba = () => {
 
   async function onSubmit(values, actions) {
     const status = await signIn("credentials", {
-      redirect: true,
+      redirect: false,
       email: values.email,
       password: values.password,
       callbackUrl: "https://next-crud-auth.netlify.app",
