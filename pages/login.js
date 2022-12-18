@@ -76,10 +76,10 @@ const loginPrueba = () => {
 
   async function onSubmit(values, actions) {
     const status = await signIn("credentials", {
-      redirect: false,
+      redirect: true,
       email: values.email,
       password: values.password,
-      callbackUrl: "https://next-crud-auth.netlify.app",
+      callbackUrl: "/",
     });
     actions.resetForm();
 
