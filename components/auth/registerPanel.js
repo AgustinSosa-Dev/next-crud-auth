@@ -90,10 +90,10 @@ export default function RegisterPrueba() {
       body: JSON.stringify(values),
     };
 
-    await fetch("http://localhost:3000/api/auth/signup", options)
+    await fetch("https://next-crud-auth.netlify.app/api/auth/signup", options)
       .then((res) => res.json())
       .then((data) => {
-        if (data) router.push("http://localhost:3000");
+        if (data) router.push("https://next-crud-auth.netlify.app");
       });
     actions.resetForm();
   }
