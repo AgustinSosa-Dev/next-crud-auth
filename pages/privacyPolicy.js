@@ -104,11 +104,11 @@ const privacyPolicy = () => {
           <p>
             <strong>Website</strong> refers to AuthApp, accessible from{" "}
             <a
-              href="https://next-crud-auth.netlify.app/"
+              href={`${process.env.NEXTAUTH_URL}/`}
               rel="external nofollow noopener"
               target="_blank"
             >
-              https://next-crud-auth.netlify.app/
+              {`${process.env.NEXTAUTH_URL}/`}
             </a>
           </p>
         </li>

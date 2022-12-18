@@ -79,7 +79,7 @@ const loginPrueba = () => {
       redirect: true,
       email: values.email,
       password: values.password,
-      callbackUrl: "https://next-crud-auth.netlify.app/",
+      callbackUrl: process.env.NEXTAUTH_URL,
     });
     actions.resetForm();
 
@@ -89,19 +89,19 @@ const loginPrueba = () => {
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", {
-      callbackUrl: "https://next-crud-auth.netlify.app",
+      callbackUrl: process.env.NEXTAUTH_URL,
     });
   }
   //GitHub Handler Function
   async function handleGithubSignIn() {
     signIn("github", {
-      callbackUrl: "https://next-crud-auth.netlify.app",
+      callbackUrl: process.env.NEXTAUTH_URL,
     });
   }
 
   async function handleFacebookSignIn() {
     signIn("facebook", {
-      callbackUrl: "https://next-crud-auth.netlify.app",
+      callbackUrl: process.env.NEXTAUTH_URL,
     });
   }
 
