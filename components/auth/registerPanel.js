@@ -90,14 +90,13 @@ export default function RegisterPrueba() {
       body: JSON.stringify(values),
     };
 
-    await fetch(process.env.NEXTAUTH_URL + "/api/auth/signup", options)
+    await fetch("http://localhost:3000/api/auth/signup", options)
       .then((res) => res.json())
       .then((data) => {
-        if (data) router.push(process.env.NEXTAUTH_URL);
+        if (data) router.push("http://localhost:3000");
       });
     actions.resetForm();
   }
-
   /* Destructuring the values object. */
   const { username, email, password, cpassword } = values;
   /**

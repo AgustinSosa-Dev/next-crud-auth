@@ -79,7 +79,7 @@ const loginPrueba = () => {
       redirect: true,
       email: values.email,
       password: values.password,
-      callbackUrl: process.env.NEXTAUTH_URL,
+      callbackUrl: "/",
     });
     actions.resetForm();
 
@@ -95,13 +95,13 @@ const loginPrueba = () => {
   //GitHub Handler Function
   async function handleGithubSignIn() {
     signIn("github", {
-      callbackUrl: process.env.NEXTAUTH_URL,
+      callbackUrl: "http://localhost:3000",
     });
   }
 
   async function handleFacebookSignIn() {
     signIn("facebook", {
-      callbackUrl: process.env.NEXTAUTH_URL,
+      callbackUrl: "http://localhost:3000",
     });
   }
 
@@ -155,7 +155,7 @@ const loginPrueba = () => {
             </div>
 
             <Component.TitleLevel3 className="text-2xl pt-5">
-              or
+              ✦ or ✦
             </Component.TitleLevel3>
             <Component.Title className="text-3xl text-sky-700 capitalize opacity-60 animate-pulse pb-9 pt-6">
               Sign in with email

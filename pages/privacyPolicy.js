@@ -104,11 +104,11 @@ const privacyPolicy = () => {
           <p>
             <strong>Website</strong> refers to AuthApp, accessible from{" "}
             <a
-              href={`${process.env.NEXTAUTH_URL}/`}
+              href="http://localhost:3000/"
               rel="external nofollow noopener"
               target="_blank"
             >
-              {`${process.env.NEXTAUTH_URL}/`}
+              http://localhost:3000
             </a>
           </p>
         </li>

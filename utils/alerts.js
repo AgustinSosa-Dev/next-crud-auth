@@ -37,21 +37,12 @@ const cancelledEmployeeAlert = async () => {
     },
     buttonsStyling: false,
   });
-  swalWithTaildwind
-    .fire({
-      title: "Cancelled",
-      text: "Your employee is safe",
-      icon: "error",
-      cancelButtonText: "Ok",
-      reverseButtons: true,
-    })
-    .then((result) => {
-      if (result.dismiss === Swal.DismissReason.cancel) {
-        swalWithTaildwind.fire("Cancelled", "Your employee is safe", "error");
-      } else {
-        null;
-      }
-    });
+  swalWithTaildwind.fire({
+    title: "Cancelled",
+    text: "Your employee is safe",
+    icon: "error",
+    cancelButtonText: "Ok",
+  });
 };
 
 export {
