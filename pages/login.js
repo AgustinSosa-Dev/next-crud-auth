@@ -89,13 +89,13 @@ const loginPrueba = () => {
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", {
-      callbackUrl: "https://next-crud-auth.netlify.app",
+      callbackUrl: process.env.NEXTAUTH_URL,
     });
   }
   //GitHub Handler Function
   async function handleGithubSignIn() {
     signIn("github", {
-      callbackUrl: String(process.env.NEXTAUTH_URL),
+      callbackUrl: "http://localhost:3000",
     });
   }
 
@@ -155,7 +155,7 @@ const loginPrueba = () => {
             </div>
 
             <Component.TitleLevel3 className="text-2xl pt-5">
-              ✦ or ✦
+              or
             </Component.TitleLevel3>
             <Component.Title className="text-3xl text-sky-700 capitalize opacity-60 animate-pulse pb-9 pt-6">
               Sign in with email
