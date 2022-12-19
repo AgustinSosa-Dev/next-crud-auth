@@ -89,7 +89,7 @@ const loginPrueba = () => {
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", {
-      callbackUrl: process.env.NEXTAUTH_URL.toString(),
+      callbackUrl: process.env.NEXTAUTH_URL,
     });
   }
   //GitHub Handler Function
