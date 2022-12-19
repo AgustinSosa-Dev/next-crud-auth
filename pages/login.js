@@ -95,7 +95,7 @@ const loginPrueba = () => {
   //GitHub Handler Function
   async function handleGithubSignIn() {
     signIn("github", {
-      callbackUrl: "http://localhost:3000",
+      callbackUrl: String(process.env.NEXTAUTH_URL),
     });
   }
 
