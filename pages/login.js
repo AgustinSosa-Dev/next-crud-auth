@@ -89,7 +89,8 @@ const loginPrueba = () => {
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", {
-      callbackUrl: process.env.NEXTAUTH_URL,
+      callbackUrl:
+        "https://next-auth-crud-i3w5ghef4-agustinsosa-dev.vercel.app/api/auth/callback/google",
     });
   }
   //GitHub Handler Function
