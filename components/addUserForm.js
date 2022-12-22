@@ -24,6 +24,8 @@ function InputErrorMessage({ touched, errors, inputName }) {
 export default function AddUserForm(formData, setFormData) {
   const [currentRadio, setCurrentRadio] = useState("");
   const queryClient = useQueryClient();
+
+  /* A mutation hook that is used to mutate the data to the database. */
   const addMutation = useMutation(addUser, {
     onSuccess: () => {
       queryClient.prefetchQuery("users", getUsers);
@@ -34,6 +36,7 @@ export default function AddUserForm(formData, setFormData) {
     touched,
     errors,
     getFieldProps,
+    values,
     isValid,
     dirty,
     isSubmitting,
@@ -45,6 +48,7 @@ export default function AddUserForm(formData, setFormData) {
       lastname: "",
       email: "",
       salary: "",
+      date: "",
     },
     validationSchema: Yup.object().shape({
       firstname: Yup.string()
@@ -89,6 +93,7 @@ export default function AddUserForm(formData, setFormData) {
    * @param formData - The form data that is passed to the onSubmit function.
    * @returns The formData object is being returned.
    */
+
   function onSubmit(formData) {
     if (Object.keys(formData).length == 0)
       return console.log("Don't have Form Data");
@@ -108,25 +113,49 @@ export default function AddUserForm(formData, setFormData) {
     successEmployeeAlert();
   }
 
+  /* Checking if the mutation is loading, if it is an error, or if it is a success. */
   if (addMutation.isLoading) return <div>Loading!</div>;
   if (addMutation.isError)
     return <Bug message={addMutation.error.message}></Bug>;
   if (addMutation.isSuccess) return <></>;
+
+  /* Destructuring the values object. */
+  const { firstname, lastname, email, salary, date } = values;
+
+  const handleInputState = () => {
+    if (firstname || lastname || email || salary != "") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleCompleteForm = () => {
+    if (firstname && lastname && email && salary && date != "") {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const handleRadio = (e) => {
     setCurrentRadio(e.target.value);
   };
 
   return (
-    <form className="grid lg:grid-cols-2 w-4/6 gap-4" onSubmit={handleSubmit}>
+    <form
+      className="grid lg:grid-cols-2 p-6 w-4/6 gap-10 bg-slate-700"
+      onSubmit={handleSubmit}
+    >
       <div className="input-type">
         <input
           type="text"
           onChange={setFormData}
           name="firstname"
-          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-900 border-b-4 border-slate-100"
           autoComplete="off"
-          placeholder="FirstName"
+          placeholder="First Name"
+          required
           minLength={3}
           maxLength={25}
           {...getFieldProps("firstname")}
@@ -141,9 +170,10 @@ export default function AddUserForm(formData, setFormData) {
           type="text"
           onChange={setFormData}
           name="lastname"
-          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-900 border-b-2 border-slate-400"
           autoComplete="off"
-          placeholder="LastName"
+          required
+          placeholder="Last Name"
           minLength={3}
           maxLength={25}
           {...getFieldProps("lastname")}
@@ -156,8 +186,9 @@ export default function AddUserForm(formData, setFormData) {
           onChange={setFormData}
           name="email"
           maxLength={255}
-          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-900 border-b-2 border-slate-400"
           autoComplete="off"
+          required
           placeholder="Email"
           {...getFieldProps("email")}
         />
@@ -169,8 +200,9 @@ export default function AddUserForm(formData, setFormData) {
           type="number"
           name="salary"
           autoComplete="off"
-          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-600 border-b-2 border-slate-400"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-900 border-b-2 border-slate-400"
           placeholder="Salary"
+          required
           maxLength={255}
           {...getFieldProps("salary")}
         />
@@ -180,8 +212,9 @@ export default function AddUserForm(formData, setFormData) {
         <input
           type="date"
           onChange={setFormData}
+          required
           name="date"
-          className="border px-5 py-3 focus:outline-none rounded-md focus:border-b-4 focus:border-slate-400 border-b-2 border-slate-400"
+          className="border px-5 py-3 focus:outline-none rounded-md focus:border-b-4 focus:border-slate-900 border-b-2 border-slate-400"
           {...getFieldProps("date")}
         />
       </div>
@@ -196,7 +229,7 @@ export default function AddUserForm(formData, setFormData) {
             name="status"
             className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-700 bg-white checked:bg-green-500 checked:border-green-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer focus:border-gray-900"
           />
-          <label htmlFor="radio1" className="inline-block tet-gray-800">
+          <label htmlFor="radio1" className="inline-block text-white">
             Active
           </label>
         </div>
@@ -210,15 +243,19 @@ export default function AddUserForm(formData, setFormData) {
             name="status"
             className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-700  bg-white checked:bg-rose-500 checked:border-rose-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer focus:border-gray-900"
           />
-          <label htmlFor="radio2" className="inline-block tet-gray-800">
+          <label htmlFor="radio2" className="inline-block text-white">
             Inactive
           </label>
         </div>
       </div>
       <div className="input-type ">
         <button
-          type="reset"
-          className="flex justify-center text-md w-4/6 bg-red-400 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-red-400 hover:text-red-400"
+          className={
+            !handleInputState()
+              ? "flex justify-center text-md w-4/6 bg-red-400 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-red-400 hover:text-red-400 duration-1000 cursor-not-allowed"
+              : "flex justify-center text-md w-4/6 bg-sky-400 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-sky-400 hover:text-sky-400 duration-1000 cursor-pointer"
+          }
+          disabled={!handleInputState()}
           onClick={() => {
             resetForm();
           }}
@@ -228,10 +265,12 @@ export default function AddUserForm(formData, setFormData) {
       </div>
       <button
         type="submit"
-        className="flex justify-center cursor-pointer text-md w-4/6 bg-green-800 text-white font-extrabold px-4 py-2 border rounded-md hover:bg-gray-50
-        disabled:bg-green-400 opacity-40
-        hover:border-green-700 hover:text-black"
-        disabled={!(isValid && dirty) || isSubmitting}
+        className={
+          !handleCompleteForm()
+            ? "flex justify-center text-md w-4/6 bg-red-700 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-red-700 hover:text-red-400 cursor-not-allowed duration-1000"
+            : "flex justify-center text-md w-4/6 bg-emerald-500 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-emerald-400 hover:text-emerald-400 duration-1000 cursor-pointer"
+        }
+        disabled={!handleCompleteForm()}
       >
         Add
         <span className="px-1 ">

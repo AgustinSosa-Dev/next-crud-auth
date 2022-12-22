@@ -12,7 +12,7 @@ export async function getUsers(req, res) {
   }
 }
 
-// get : http://localhost:3000/api/users/1
+// get : http://localhost:3000/api/users/userId
 export async function getUser(req, res) {
   try {
     const { userId } = req.query;
@@ -40,7 +40,7 @@ export async function postUser(req, res) {
   }
 }
 
-// put : http://localhost:3000/api/users/1
+// put : http://localhost:3000/api/users/userId
 export async function putUser(req, res) {
   try {
     const { userId } = req.query;
@@ -56,7 +56,7 @@ export async function putUser(req, res) {
   }
 }
 
-// delete: http://localhost:3000/api/users/1
+// delete: http://localhost:3000/api/users/userId
 export async function deleteUser(req, res) {
   try {
     const { userId } = req.query;

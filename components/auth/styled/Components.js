@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   justify-content: center;
   with: 100vw;
   height: 100vh;
-  background-color: #fff;
+  background-color: rgba(30, 41, 59, 0.9);
 `;
 
 export const Container = styled.div`

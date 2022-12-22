@@ -6,7 +6,7 @@ function successEmployeeAlert() {
     icon: "success",
     title: "Employee added successfully!",
     showConfirmButton: false,
-    timer: 4000,
+    timer: 2000,
   });
 }
 
@@ -16,7 +16,7 @@ function updatedEmployeeAlert() {
     icon: "success",
     title: "Employee updated successfully!",
     showConfirmButton: false,
-    timer: 4000,
+    timer: 2000,
   });
 }
 
@@ -25,7 +25,7 @@ function deletedEmployeeAlert() {
     icon: "success",
     title: "Employee deleted successfully!",
     showConfirmButton: true,
-    timer: 4000,
+    timer: 3000,
   });
 }
 

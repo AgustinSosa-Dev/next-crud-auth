@@ -8,32 +8,8 @@
 .box{
     width: 90%;
     height: 80%;
-    background-color: rgba(25, 25, 25, 0.4);
+    background-color: rgba(50, 55, 55, 0.3);
 }
-
-.things > .content {
-    float: left;
-    width: 25%;
-    height: 500px;
-    -webkit-box-sizing: border-box; 
-    -moz-box-sizing: border-box;    
-    box-sizing: border-box;
-    position: relative;
-  }
-  
-  .things > .content h3 {
-    font-family: 'Arial', sans-serif;
-    text-transform: uppercase;
-    top: 50;
-    bottom: 0;
-    left: 100;
-    right: 100;
-    margin: auto;
-    position: absolute;
-    height: 150px;
-    color: #89323B;
-  }
-
 
   .wrap {
     height: 100%;
@@ -56,7 +32,7 @@
     background: linear-gradient(90deg, rgba(115,23,217,0.8) 0%,#b56 100%);
     border: none;
     border-radius: 1000px;
-    box-shadow: 12px 12px 24px rgba(221,0,28,0.4);
+    box-shadow: 12px 18px 24px rgba(221,0,28,0.4);
     transition: all 0.3s ease-in-out 0s;
     cursor: pointer;
     outline: none;
@@ -152,12 +128,12 @@
   }
 
   .item {
-    background-color: #F6E3CA;
+    background-color: rgb(234, 190, 63);
     border: #D7C8B6 2px solid;    
 }
 
 .item:hover {
-    background-color: white;
+    background-color: #F6E3CA;
     color: #000;
     font-weight: bold
 }

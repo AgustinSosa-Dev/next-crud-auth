@@ -44,30 +44,30 @@ export default function Profile() {
       </Head>
       <NavBar />
       <main className="py-5 overflow-auto ">
-        <h1 className="mb-4 text-3xl py-10 font-extrabold text-center text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+        <h1 className="shadow-2xl mb-4 text-6xl py-10 font-extrabold text-center text-gray-800 hover:opacity-75 duration-500 cursor-default dark:text-white md:text-5xl lg:text-8xl">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-400 from-sky-600">
             Management System
           </span>
         </h1>
-        <div className="container mx-auto flex justify-between py-5 border-b">
+        <div className="container mx-auto flex justify-between py-5 border-b-2 border-b-slate-500 mb-8">
           <div className="left flex gap-3">
             <button
               onClick={handler}
               className={
                 visible
-                  ? "flex bg-green-500 text-white px-4 py-2 ml-5 border rounded-md hover:bg-grary-50 hover:border-indigo-500 hover:text-gray-800 scale-110 hover:scale-125"
-                  : "flex bg-rose-500 text-white px-4 py-2 ml-3 border rounded-md hover:bg-grary-50 hover:border-indigo-500 hover:text-gray-800"
+                  ? "flex bg-green-500 text-white px-4 py-2 ml-5 border rounded-md hover:bg-grary-50 hover:border-black hover:text-gray-800 scale-110 hover:scale-125 duration-700"
+                  : "flex bg-rose-500 text-white px-4 py-2 ml-3 border rounded-md hover:bg-grary-50 hover:black hover:text-gray-800 duration-300"
               }
             >
               {visible
                 ? "Show Form" && (
                     <span className="px-1 text-white-500 font-bold w-6 h-4 ">
-                      <BiUserPlus size={26} />
+                      <BiUserPlus size={27} />
                     </span>
                   )
                 : "Hide Form" && (
                     <span className="px-1 text-white-500 font-bold w-6 h-4">
-                      <BiUserMinus size={22} />
+                      <BiUserMinus size={20} />
                     </span>
                   )}
             </button>
@@ -88,7 +88,7 @@ export default function Profile() {
 function DeleteComponent({ deleteHandler, cancelHandler }) {
   return (
     <div className="flex gap-5">
-      <button className="text-xl font-bold text-dark px-2">
+      <button className="text-xl font-bold text-white px-2">
         Are you sure?
       </button>
       <button

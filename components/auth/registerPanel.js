@@ -150,7 +150,10 @@ export default function RegisterPrueba() {
               {...getFieldProps("username")}
             />
             <span className="icon flex items-center px-4">
-              <HiUser size={30} title="Min - 6 | Max - 24 characters." />
+              <HiUser
+                size={30}
+                title="Min - 6 | Max - 24 characters. It is allowed to contain accented letters and special characters."
+              />
             </span>
           </div>
           <div className={styles.group}>
@@ -249,7 +252,7 @@ export default function RegisterPrueba() {
           <div className="pb-12 pt-9">
             <Component.SignUpButton
               type="submit"
-              className={styles.button}
+              className={`duration-700 ${styles.button}`}
               disabled={!(isValid && dirty) || isSubmitting}
             >
               Sign Up
@@ -259,7 +262,11 @@ export default function RegisterPrueba() {
             <Component.Button
               type="reset"
               value={values}
-              className={!handleInputState() ? "bg-rose-500" : "bg-green-500"}
+              className={
+                !handleInputState()
+                  ? "bg-rose-500 hover:duration-500"
+                  : "bg-green-500 hover:duration-500"
+              }
               disabled={!handleInputState()}
               onClick={() => {
                 resetForm();

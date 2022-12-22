@@ -9,7 +9,7 @@ const BtnSignOut = ({ handleSignOut }) => {
   return (
     <div className="cursor flex">
       <button
-        className="flex justify-center text-md w-6/6 bg-gray-50 text-purple-500 font-semibold px-4 py-2 border rounded-lg hover:bg-purple-400 hover:border-green-500 hover:text-white"
+        className="flex justify-center text-md w-6/6 bg-gray-50 text-purple-500 font-semibold px-4 py-2 border rounded-lg hover:bg-purple-400 hover:border-green-500 hover:text-white duration-1000"
         onClick={handleSignOut}
       >
         Sign Out

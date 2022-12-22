@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { getSession, useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useFormik } from "formik";
@@ -9,11 +10,10 @@ import { HiAtSymbol } from "react-icons/hi";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { BiErrorCircle } from "react-icons/bi";
 import styles from "../styles/Form.module.css";
-import RegisterPanel from "../components/auth/registerPanel";
 import * as Component from "../components/auth/styled/Components";
+import RegisterPanel from "../components/auth/registerPanel";
 import RightPanel from "../components/auth/rightPanel";
 import LeftPanel from "../components/auth/leftPanel";
-import { getSession, useSession } from "next-auth/react";
 
 function InputErrorMessage({ touched, errors, inputName }) {
   return (
@@ -74,6 +74,16 @@ const loginPrueba = () => {
     errors,
   };
 
+  /**
+   * It takes the values from the form and sends them to the signIn function, which
+   * is a function that I wrote that uses the Auth0 API to sign in a user.
+   *
+   * If the sign in is successful, the user is redirected to the callbackUrl.
+   *
+   * If the sign in is unsuccessful, the user is redirected to the same page.
+   * @param values - The values of the form.
+   * @param actions - The object containing all of the actions available to the form.
+   */
   async function onSubmit(values, actions) {
     const status = await signIn("credentials", {
       redirect: true,
@@ -89,7 +99,7 @@ const loginPrueba = () => {
   //Google Handler Function
   async function handleGoogleSignIn() {
     signIn("google", {
-      callbackUrl: "https://next-auth-crud-oe7s.vercel.app",
+      callbackUrl: "http://localhost:3000",
     });
   }
   //GitHub Handler Function
@@ -123,7 +133,7 @@ const loginPrueba = () => {
             </Component.Title>
             <div>
               <Component.SocialButton
-                className="animate-bounce hover:animate-none"
+                className="animate-bounce hover:animate-none duration-500"
                 onClick={handleGoogleSignIn}
               >
                 <Image
@@ -133,7 +143,7 @@ const loginPrueba = () => {
                 ></Image>
               </Component.SocialButton>
               <Component.SocialButton
-                className="animate-bounce hover:animate-none"
+                className="animate-bounce hover:animate-none duration-600"
                 onClick={handleGithubSignIn}
               >
                 <Image
@@ -143,7 +153,7 @@ const loginPrueba = () => {
                 ></Image>
               </Component.SocialButton>
               <Component.SocialButton
-                className="animate-bounce hover:animate-none"
+                className="animate-bounce hover:animate-none duration-700"
                 onClick={handleFacebookSignIn}
               >
                 <Image
@@ -155,7 +165,7 @@ const loginPrueba = () => {
             </div>
 
             <Component.TitleLevel3 className="text-2xl pt-5">
-              or
+              ◈ or ◈
             </Component.TitleLevel3>
             <Component.Title className="text-3xl text-sky-700 capitalize opacity-60 animate-pulse pb-9 pt-6">
               Sign in with email

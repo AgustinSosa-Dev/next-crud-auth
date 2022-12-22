@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import BtnSignOut from "./auth/btnSignOut";
 import { HiHome, HiUser } from "react-icons/hi";
@@ -33,7 +33,7 @@ const NavBar = () => {
                     className={
                       router.pathname == "/"
                         ? "block mt-4 lg:inline-block lg:mt-0  lg:text-2xl current:text-amber-500 active border-b-4 border-slate-500 "
-                        : "opacity-30 duration-700 "
+                        : "opacity-30 duration-1000 hover:opacity-40"
                     }
                   >
                     <HiHome size={50} />
@@ -46,8 +46,8 @@ const NavBar = () => {
                     <span
                       className={
                         router.pathname == "/profile"
-                          ? "block mt-4 lg:inline-block lg:mt-0  lg:text-2xl current:text-purple-700 active border-b-4 border-slate-500"
-                          : "hover:text-purple-700 duration-1000 opacity-40"
+                          ? "block mt-4 lg:inline-block lg:mt-0  lg:text-2xl current:text-purple-400 active border-b-4 border-slate-500"
+                          : "hover:text-purple-500 duration-1000 opacity-40"
                       }
                     >
                       <HiUser size={50} />

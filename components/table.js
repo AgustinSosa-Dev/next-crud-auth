@@ -7,18 +7,30 @@ import {
   deleteAction,
 } from "../redux/states/reducer";
 import { getUsers } from "../lib/helper";
+import Bug from "./bug";
+import Loader from "./loader";
 
 export default function Table() {
   const { isLoading, isError, data, error } = useQuery("users", getUsers);
 
-  if (isLoading) return <div>Employee is Loading...</div>;
-  if (isError) return <div>Got Error {error}</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  if (isError)
+    return (
+      <div>
+        <Bug message="Got error." /> {error}
+      </div>
+    );
 
   return (
     <div className="overflow-auto relative shadow-md sm:rounded-lg mx-3 ">
       <table className="min-w-full table-auto overflow-y-auto ">
         <thead>
-          <tr className="bg-gray-800">
+          <tr className="bg-gray-500">
             <th className="px-2 py-2">
               <span className="text-gray-200">Name</span>
             </th>
@@ -74,7 +86,7 @@ function Tr({ _id, name, avatar, email, salary, date, status }) {
   };
 
   return (
-    <tr className="bg-gray-100 text-center">
+    <tr className="bg-indigo-100 text-center font-semibold">
       <td className="px-2 py-2 flex flex-row items-center">
         <img
           src={avatar || "#"}

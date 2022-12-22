@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import NavBar from "../navBar";
 import styles from "../../styles/AuthorizeUser.module.css";
+import Footer from "../footer";
 
 export default function AuthorizeUser() {
   return (
@@ -15,24 +16,27 @@ export default function AuthorizeUser() {
         <h5 className="py-1 mx-6"></h5>
       </div>
       <div className={styles.container}>
-        <h1 className={`${styles.animate_text}`}>
-          Welcome to our home page.....
+        <h1 className={`tracking-widest ${styles.animate_text}`}>
+          Welcome to our home page....
           <span className={styles.space}>&#160;</span>
         </h1>
       </div>
       <div className="content">
         <h3>
-          <div className={`pt-24 ${styles.wrap}`}>
+          <div className={`pt-32 ${styles.wrap}`}>
             <Link href={"/profile"}>
               <button
                 type="button"
-                className={`pt-20 ${styles.profile_button}`}
+                className={`duration-700 hover:duration-1000 ${styles.profile_button}`}
               >
                 <span>Profile Page</span>
               </button>
             </Link>
           </div>
         </h3>
+      </div>
+      <div className="xl:mt-96 bg-gradient-to-br from-sky-300 w-full h-18 overflow-hidden">
+        <Footer />
       </div>
     </section>
   );
