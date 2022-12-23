@@ -32,55 +32,46 @@ export default function AddUserForm(formData, setFormData) {
     },
   });
 
-  const {
-    touched,
-    errors,
-    getFieldProps,
-    values,
-    isValid,
-    dirty,
-    isSubmitting,
-    resetForm,
-    handleSubmit,
-  } = useFormik({
-    initialValues: {
-      firstname: "",
-      lastname: "",
-      email: "",
-      salary: "",
-      date: "",
-    },
-    validationSchema: Yup.object().shape({
-      firstname: Yup.string()
-        .required("Firstname is required")
-        .min(3, "Minimum characters allowed: Three (3).")
-        .matches(
-          /^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/,
-          "The First Name must contain only letters and can contain accents, hyphens and spaces."
-        ),
-      lastname: Yup.string()
-        .required("Lastname is required")
-        .min(3, "Minimum characters allowed: Three (3).")
-        .matches(
-          /^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/,
-          "The First Name must contain only letters and can contain accents, hyphens and spaces."
-        ),
-      email: Yup.string()
-        .email("Invalid email format")
-        .required("Email is required")
-        .matches(
-          /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
-          "Please enter a valid email format."
-        ),
-      salary: Yup.number()
-        .positive("The Value must be a positive number.")
-        .lessThan(15000, "The value must be less than US$15000.")
-        .min(500, "The value must be strictly greater than US$500.")
-        .required("Salary is required"),
-    }),
+  const { touched, errors, getFieldProps, values, resetForm, handleSubmit } =
+    useFormik({
+      initialValues: {
+        firstname: "",
+        lastname: "",
+        email: "",
+        salary: "",
+        date: "",
+      },
+      validationSchema: Yup.object().shape({
+        firstname: Yup.string()
+          .required("Firstname is required")
+          .min(3, "Minimum characters allowed: Three (3).")
+          .matches(
+            /^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/,
+            "The First Name must contain only letters and can contain accents, hyphens and spaces."
+          ),
+        lastname: Yup.string()
+          .required("Lastname is required")
+          .min(3, "Minimum characters allowed: Three (3).")
+          .matches(
+            /^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/,
+            "The First Name must contain only letters and can contain accents, hyphens and spaces."
+          ),
+        email: Yup.string()
+          .email("Invalid email format")
+          .required("Email is required")
+          .matches(
+            /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+            "Please enter a valid email format."
+          ),
+        salary: Yup.number()
+          .positive("The Value must be a positive number.")
+          .lessThan(15000, "The value must be less than US$15000.")
+          .min(500, "The value must be strictly greater than US$500.")
+          .required("Salary is required"),
+      }),
 
-    onSubmit,
-  });
+      onSubmit,
+    });
   const defaultErrorMessageProps = {
     touched,
     errors,
@@ -203,7 +194,6 @@ export default function AddUserForm(formData, setFormData) {
           className="border w-full px-5 py-3 focus:outline-none rounded-md focus:border-b-8 focus:border-slate-900 border-b-2 border-slate-400"
           placeholder="Salary"
           required
-          maxLength={255}
           {...getFieldProps("salary")}
         />
         <InputErrorMessage {...defaultErrorMessageProps} inputName="salary" />

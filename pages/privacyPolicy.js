@@ -1,11 +1,11 @@
 import NavBar from "../components/navBar";
 import Footer from "../components/footer";
+import { getSession } from "next-auth/react";
 
 const privacyPolicy = () => {
   return (
     <section>
       <NavBar />
-
       <div className="text-white px-4">
         <h1 className="text-lg font-bold pt-8 pb-8 underline">
           Privacy Policy
@@ -553,5 +553,22 @@ const privacyPolicy = () => {
     </section>
   );
 };
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  // authorize user return session
+  return {
+    props: { session },
+  };
+}
 
 export default privacyPolicy;
